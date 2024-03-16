@@ -108,11 +108,8 @@ dev_dependencies:
   # Local Database
   # drift_dev: ^2.5.2
 
-# dependency_overrides:
-#   reactive_forms: ^16.0.2
-#   analyzer: ^5.11.1
-#   path: ^1.8.3
-#   intl: ^0.18.1
+dependency_overrides:
+  smart_auth: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
