@@ -70,8 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                               context.route.pop();
                             } else {
                               // context.read<AuthCubit>().login(formG.value);
-                              context.route
-                                  .pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
+                              context.route.pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
                             }
                           },
                           title: "Masuk",
@@ -80,18 +79,17 @@ class _LoginPageState extends State<LoginPage> {
                         18.verticalSpaceRadius,
                         Text.rich(
                           TextSpan(
-                            text: "Belum memiliki akun? ",
+                            text: "Mengalami Kendala? ",
                             style: AppStyles.text14Px.copyWith(
                               color: ColorTheme.black,
                             ),
                             children: [
                               TextSpan(
-                                text: "Daftar",
+                                text: "Hubungi Admin",
                                 style: AppStyles.text14PxBold.copyWith(
                                   color: ColorTheme.primary,
                                 ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => context.route.push(const RegisterRoute()),
+                                recognizer: TapGestureRecognizer()..onTap = () {},
                               ),
                             ],
                           ),
@@ -109,14 +107,11 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(
-                    top: kBottomNavigationBarHeight,
-                    bottom: 20,
-                  ),
+                  padding: EdgeInsets.only(top: kBottomNavigationBarHeight, bottom: 20),
                   child: BaseLogo(isSmall: true),
                 ),
                 Text(
-                  'Selamat datang di Nexteam',
+                  'Selamat datang di Snel',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: CustomTextTheme.paragraph3.copyWith(
@@ -145,25 +140,6 @@ class _LoginPageState extends State<LoginPage> {
                   hint: "Masukkan Password anda",
                   isRequiredText: true,
                   prefix: Icon(Icons.key),
-                ),
-                8.verticalSpace,
-                Text.rich(
-                  TextSpan(
-                    text: "Lupa kata sandi ? ",
-                    style: AppStyles.text14Px.copyWith(
-                      color: ColorTheme.black,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: "Klik di sini",
-                        style: AppStyles.text14PxBold.copyWith(
-                          color: ColorTheme.primary,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => context.route.push(const ForgotPasswordRoute()),
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

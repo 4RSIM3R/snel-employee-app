@@ -11,16 +11,15 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_pinput/reactive_pinput.dart';
 
 import '../../../../application/auth/auth_cubit.dart';
-import '../../../routes/app_router.dart';
 import 'widget/resend_otp_timer.dart';
 
 @RoutePage()
 class OtpPage extends StatelessWidget {
   const OtpPage({
-    Key? key,
+    super.key,
     required this.email,
     this.isResetPassword = false,
-  }) : super(key: key);
+  });
 
   final String email;
   final bool isResetPassword;
@@ -39,10 +38,10 @@ class OtpPage extends StatelessWidget {
 
 class OtpView extends StatefulWidget {
   const OtpView({
-    Key? key,
+    super.key,
     required this.email,
     this.isResetPassword = false,
-  }) : super(key: key);
+  });
 
   final String email;
   final bool isResetPassword;
@@ -100,8 +99,7 @@ class _OtpViewState extends State<OtpView> {
               Text(
                 'Masukkan kode verifikasi yang kami kirimkan kepada '
                 'Anda di: ${widget.email}',
-                style: CustomTextTheme.paragraph1
-                    .copyWith(color: ColorTheme.neutral[600]),
+                style: CustomTextTheme.paragraph1.copyWith(color: ColorTheme.neutral[600]),
               ),
               20.verticalSpaceRadius,
               ReactivePinPut(
@@ -117,9 +115,7 @@ class _OtpViewState extends State<OtpView> {
                       TextSpan(
                         text: 'Kirim Ulang',
                         style: TextStyle(
-                          color: showResend
-                              ? ColorTheme.primary
-                              : ColorTheme.neutral[800],
+                          color: showResend ? ColorTheme.primary : ColorTheme.neutral[800],
                           fontWeight: showResend ? FontWeight.bold : null,
                         ),
                         recognizer: TapGestureRecognizer()
@@ -133,8 +129,7 @@ class _OtpViewState extends State<OtpView> {
                               : null,
                       ),
                     ],
-                    style: CustomTextTheme.paragraph1
-                        .copyWith(color: ColorTheme.neutral[900]),
+                    style: CustomTextTheme.paragraph1.copyWith(color: ColorTheme.neutral[900]),
                   ),
                 ),
               ),
@@ -156,22 +151,9 @@ class _OtpViewState extends State<OtpView> {
                     orElse: () {},
                     loading: () => context.showLoadingIndicator(),
                     error: (msg) {
-                      context.showSnackbar(
-                          title: "Error", message: msg, error: true);
+                      context.showSnackbar(title: "Error", message: msg, error: true);
                     },
-                    success: (msg) {
-                      context.hideLoading();
-                      if (widget.isResetPassword) {
-                        context.route.replace(
-                          ChangePasswordRoute(
-                            email: widget.email,
-                            otp: formG.rawValue['otp'].toString(),
-                          ),
-                        );
-                        return;
-                      }
-                      context.route.replace(SuccessRoute(message: msg));
-                    },
+                    success: (msg) {},
                     successAdd: (msg) {
                       context.hideLoading();
                       context.showSnackbar(title: "", message: msg);
@@ -187,24 +169,7 @@ class _OtpViewState extends State<OtpView> {
                     builder: (context, formState, child) {
                       return PrimaryButton(
                         title: "Verifikasi",
-                        onTap: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          if (widget.isResetPassword) {
-                            context.route.replace(
-                              ChangePasswordRoute(
-                                email: widget.email,
-                                otp: formG.rawValue['otp'].toString(),
-                              ),
-                            );
-                          } else {
-                            // context.read<AuthCubit>().verifyOtp({
-                            //   "email": widget.email,
-                            //   "otp": formState.rawValue['otp'],
-                            // });
-                            context.route.replace(SuccessRoute(
-                                message: "Berhasil verifikasi OTP"));
-                          }
-                        },
+                        onTap: () {},
                         isEnable: formState.valid,
                       );
                     },

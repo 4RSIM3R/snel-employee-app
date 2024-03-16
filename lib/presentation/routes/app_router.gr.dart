@@ -15,10 +15,22 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    ForgotPasswordRoute.name: (routeData) {
+    CatalogFormRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ForgotPasswordPage(),
+        child: const CatalogFormPage(),
+      );
+    },
+    CatalogListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CatalogListPage(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomePage(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -43,38 +55,10 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    RegisterRoute.name: (routeData) {
+    ProfileMainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RegisterPage(),
-      );
-    },
-    SuccessRoute.name: (routeData) {
-      final args = routeData.argsAs<SuccessRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: SuccessPage(
-          key: args.key,
-          message: args.message,
-        ),
-      );
-    },
-    FormRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FormPage(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomePage(),
-      );
-    },
-    PostRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const PostPage(),
+        child: const ProfileMainPage(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -83,30 +67,65 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashPage(),
       );
     },
-    ChangePasswordRoute.name: (routeData) {
-      final args = routeData.argsAs<ChangePasswordRouteArgs>();
+    TicketDetailRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: ChangePasswordPage(
-          key: args.key,
-          email: args.email,
-          otp: args.otp,
-        ),
+        child: const TicketDetailPage(),
+      );
+    },
+    TicketFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TicketFormPage(),
+      );
+    },
+    TicketListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TicketListPage(),
       );
     },
   };
 }
 
 /// generated route for
-/// [ForgotPasswordPage]
-class ForgotPasswordRoute extends PageRouteInfo<void> {
-  const ForgotPasswordRoute({List<PageRouteInfo>? children})
+/// [CatalogFormPage]
+class CatalogFormRoute extends PageRouteInfo<void> {
+  const CatalogFormRoute({List<PageRouteInfo>? children})
       : super(
-          ForgotPasswordRoute.name,
+          CatalogFormRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ForgotPasswordRoute';
+  static const String name = 'CatalogFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CatalogListPage]
+class CatalogListRoute extends PageRouteInfo<void> {
+  const CatalogListRoute({List<PageRouteInfo>? children})
+      : super(
+          CatalogListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CatalogListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -191,95 +210,15 @@ class OtpRouteArgs {
 }
 
 /// generated route for
-/// [RegisterPage]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute({List<PageRouteInfo>? children})
+/// [ProfileMainPage]
+class ProfileMainRoute extends PageRouteInfo<void> {
+  const ProfileMainRoute({List<PageRouteInfo>? children})
       : super(
-          RegisterRoute.name,
+          ProfileMainRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'RegisterRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SuccessPage]
-class SuccessRoute extends PageRouteInfo<SuccessRouteArgs> {
-  SuccessRoute({
-    Key? key,
-    required String message,
-    List<PageRouteInfo>? children,
-  }) : super(
-          SuccessRoute.name,
-          args: SuccessRouteArgs(
-            key: key,
-            message: message,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'SuccessRoute';
-
-  static const PageInfo<SuccessRouteArgs> page =
-      PageInfo<SuccessRouteArgs>(name);
-}
-
-class SuccessRouteArgs {
-  const SuccessRouteArgs({
-    this.key,
-    required this.message,
-  });
-
-  final Key? key;
-
-  final String message;
-
-  @override
-  String toString() {
-    return 'SuccessRouteArgs{key: $key, message: $message}';
-  }
-}
-
-/// generated route for
-/// [FormPage]
-class FormRoute extends PageRouteInfo<void> {
-  const FormRoute({List<PageRouteInfo>? children})
-      : super(
-          FormRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FormRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [PostPage]
-class PostRoute extends PageRouteInfo<void> {
-  const PostRoute({List<PageRouteInfo>? children})
-      : super(
-          PostRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'PostRoute';
+  static const String name = 'ProfileMainRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -299,44 +238,43 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ChangePasswordPage]
-class ChangePasswordRoute extends PageRouteInfo<ChangePasswordRouteArgs> {
-  ChangePasswordRoute({
-    Key? key,
-    required String email,
-    required String otp,
-    List<PageRouteInfo>? children,
-  }) : super(
-          ChangePasswordRoute.name,
-          args: ChangePasswordRouteArgs(
-            key: key,
-            email: email,
-            otp: otp,
-          ),
+/// [TicketDetailPage]
+class TicketDetailRoute extends PageRouteInfo<void> {
+  const TicketDetailRoute({List<PageRouteInfo>? children})
+      : super(
+          TicketDetailRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ChangePasswordRoute';
+  static const String name = 'TicketDetailRoute';
 
-  static const PageInfo<ChangePasswordRouteArgs> page =
-      PageInfo<ChangePasswordRouteArgs>(name);
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
-class ChangePasswordRouteArgs {
-  const ChangePasswordRouteArgs({
-    this.key,
-    required this.email,
-    required this.otp,
-  });
+/// generated route for
+/// [TicketFormPage]
+class TicketFormRoute extends PageRouteInfo<void> {
+  const TicketFormRoute({List<PageRouteInfo>? children})
+      : super(
+          TicketFormRoute.name,
+          initialChildren: children,
+        );
 
-  final Key? key;
+  static const String name = 'TicketFormRoute';
 
-  final String email;
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
 
-  final String otp;
+/// generated route for
+/// [TicketListPage]
+class TicketListRoute extends PageRouteInfo<void> {
+  const TicketListRoute({List<PageRouteInfo>? children})
+      : super(
+          TicketListRoute.name,
+          initialChildren: children,
+        );
 
-  @override
-  String toString() {
-    return 'ChangePasswordRouteArgs{key: $key, email: $email, otp: $otp}';
-  }
+  static const String name = 'TicketListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

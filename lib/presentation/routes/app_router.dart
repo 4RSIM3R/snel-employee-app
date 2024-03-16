@@ -1,6 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:next_starter/presentation/pages/catalog/form/catalog_form_page.dart';
+import 'package:next_starter/presentation/pages/catalog/list/catalog_list_page.dart';
+import 'package:next_starter/presentation/pages/profile/main/profile_main_page.dart';
+import 'package:next_starter/presentation/pages/tickets/detail/ticket_detail_page.dart';
+import 'package:next_starter/presentation/pages/tickets/form/ticket_form_page.dart';
+import 'package:next_starter/presentation/pages/tickets/list/ticket_list_page.dart';
 
 import '../pages/pages.dart';
 
@@ -17,15 +23,19 @@ class AppRouter extends _$AppRouter {
   @override
   final List<AutoRoute> routes = [
     AutoRoute(page: SplashRoute.page, path: '/'),
-    AutoRoute(page: FormRoute.page),
-    AutoRoute(page: PostRoute.page),
-    // auth
+    // Auth
     AutoRoute(page: LoginRoute.page),
-    AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: OtpRoute.page),
-    AutoRoute(page: ChangePasswordRoute.page),
-    AutoRoute(page: ForgotPasswordRoute.page),
-    AutoRoute(page: SuccessRoute.page),
+    // Home
     AutoRoute(page: HomeRoute.page),
+    // Ticket
+    AutoRoute(page: TicketListRoute.page),
+    AutoRoute(page: TicketDetailRoute.page),
+    AutoRoute(page: TicketFormRoute.page),
+    // Catalog
+    AutoRoute(page: CatalogListRoute.page),
+    AutoRoute(page: CatalogFormRoute.page),
+    // Profile
+    AutoRoute(page: ProfileMainRoute.page),
   ];
 }
