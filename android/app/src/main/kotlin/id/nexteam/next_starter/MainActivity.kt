@@ -1,4 +1,4 @@
-package id.nexteam.next_starter
+package id.nexteam.snel_employee
 
 import io.flutter.embedding.android.FlutterActivity
 

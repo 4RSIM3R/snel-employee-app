@@ -27,15 +27,19 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: OtpRoute.page),
     // Home
-    AutoRoute(page: HomeRoute.page),
+    AutoRoute(
+      page: HomeRoute.page,
+      children: [
+        AutoRoute(page: TicketListRoute.page),
+        AutoRoute(page: CatalogListRoute.page),
+        AutoRoute(page: ProfileMainRoute.page),
+      ],
+    ),
     // Ticket
-    AutoRoute(page: TicketListRoute.page),
     AutoRoute(page: TicketDetailRoute.page),
     AutoRoute(page: TicketFormRoute.page),
     // Catalog
-    AutoRoute(page: CatalogListRoute.page),
     AutoRoute(page: CatalogFormRoute.page),
     // Profile
-    AutoRoute(page: ProfileMainRoute.page),
   ];
 }

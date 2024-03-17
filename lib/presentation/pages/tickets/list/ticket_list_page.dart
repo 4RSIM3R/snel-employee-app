@@ -1,9 +1,23 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:next_starter/presentation/components/card/ticket_card.dart';
+import 'package:next_starter/presentation/components/components.dart';
+import 'package:next_starter/presentation/routes/app_router.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 @RoutePage()
-class TicketListPage extends StatelessWidget {
+class TicketListPage extends StatefulWidget {
   const TicketListPage({super.key});
+
+  @override
+  State<TicketListPage> createState() => _TicketListPageState();
+}
+
+class _TicketListPageState extends State<TicketListPage> {
+  final form = fb.group({
+    'status': [''],
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +44,38 @@ class TicketListPage extends StatelessWidget {
             icon: const Icon(Icons.calendar_month),
           ),
         ],
+      ),
+      body: ReactiveFormBuilder(
+        form: () => form,
+        builder: (context, form, child) {
+          return Column(
+            children: [
+              const DropdownInput(
+                title: 'Status',
+                formControlName: 'status',
+                hint: 'Ticket Status',
+                items: [
+                  {
+                    'text': 'Customer Approved',
+                    'value': 'CUSTOMER_APPROVED',
+                  }
+                ],
+              ),
+              const SizedBox(height: 16),
+              Column(
+                children: List.generate(
+                  10,
+                  (index) => TicketCard(
+                    title: 'Fixing Something In Pipeline',
+                    onTap: () {
+                      context.router.push(const TicketDetailRoute());
+                    },
+                  ),
+                ),
+              ).scrollVertical().expand(),
+            ],
+          ).p(16);
+        },
       ),
     );
   }

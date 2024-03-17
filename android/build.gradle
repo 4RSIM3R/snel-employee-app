@@ -4,7 +4,7 @@ buildscript {
         gradle_version      = '8.1.2'
         compileSdkVersion   = 34
         targetSdkVersion    = 34
-        minSdkVersion       = 21
+        minSdkVersion       = 23
         ndkVersion          = "24.0.8215888"
     }
 
