@@ -31,8 +31,7 @@ class AppCoreTheme {
     },
   );
 
-  static SystemUiOverlayStyle systemUiOverlayStyle =
-      SystemUiOverlayStyle.light.copyWith(
+  static SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle.light.copyWith(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     systemStatusBarContrastEnforced: true,
@@ -49,49 +48,7 @@ class AppCoreTheme {
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: primaryColor,
     ),
-    textTheme: GoogleFonts.robotoTextTheme(),
-    // AppBar Theme
-    appBarTheme: AppBarTheme(
-      elevation: 10.0,
-      toolbarHeight: kToolbarHeight + 10,
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
-      systemOverlayStyle: systemUiOverlayStyle,
-      iconTheme: const IconThemeData(
-        color: primaryColor,
-      ),
-      actionsIconTheme: const IconThemeData(
-        color: primaryColor,
-      ),
-      titleTextStyle: TextStyle(
-        fontSize: 18,
-        color: const Color(0xFF101010),
-        fontWeight: FontWeight.w600,
-        fontFamily: GoogleFonts.roboto().fontFamily,
-      ),
-    ),
-    // BottomNavigationBar Theme
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      elevation: 5.0,
-      backgroundColor: Colors.white,
-      showUnselectedLabels: false,
-      showSelectedLabels: true,
-      selectedIconTheme: IconThemeData(
-        color: primaryColor,
-      ),
-      unselectedIconTheme: IconThemeData(
-        color: Colors.grey,
-      ),
-      selectedLabelStyle: TextStyle(
-        color: primaryColor,
-      ),
-      unselectedLabelStyle: TextStyle(
-        color: Colors.grey,
-      ),
-      unselectedItemColor: Colors.white,
-      selectedItemColor: primaryColor,
-    ),
+    textTheme: GoogleFonts.interTextTheme(),
     // Bottom AppBar Theme
     bottomAppBarTheme: const BottomAppBarTheme(
       elevation: 10,
@@ -123,9 +80,7 @@ class AppCoreTheme {
       shape: CircleBorder(),
     ),
     // ListTile Theme
-    listTileTheme: const ListTileThemeData(
-      dense: true,
-    ),
+    listTileTheme: const ListTileThemeData(dense: true),
     // Input Decoration
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
@@ -214,8 +169,7 @@ class AppCoreTheme {
       dividerColor: Colors.transparent,
       indicatorColor: primaryColor,
       indicatorSize: TabBarIndicatorSize.label,
-      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
+      overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {
           return AppCoreColor.primary.focus;
         }
@@ -234,8 +188,7 @@ class AppCoreTheme {
     // CheckBox Button Theme
     checkboxTheme: CheckboxThemeData(
       splashRadius: 5.0,
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
+      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return primaryColor;
         }
@@ -245,8 +198,7 @@ class AppCoreTheme {
     ),
     // Radio Button Theme
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
+      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return primaryColor;
         }

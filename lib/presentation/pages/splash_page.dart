@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:next_starter/data/datasources/session/session_source.dart';
 import 'package:next_starter/presentation/components/components.dart';
-import 'package:next_starter/presentation/theme/theme.dart';
 
 import '../../common/extensions/extensions.dart';
 import '../../injection.dart';
@@ -24,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> init() async {
-    await 3.delayedSeconds;
+    await 1.delayedSeconds;
     final user = await locator<SessionSource>().hasSession;
     if (user) {
       locator<AppRouter>().replace(const HomeRoute());
@@ -35,16 +34,10 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: 12.rounded,
-          border: Border.all(
-            color: ColorTheme.primary,
-          ),
-        ),
-        child: const BaseLogo(),
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: BaseLogo(),
       ),
     );
   }
