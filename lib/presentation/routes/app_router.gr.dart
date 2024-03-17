@@ -34,8 +34,7 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      final args = routeData.argsAs<LoginRouteArgs>(
-          orElse: () => const LoginRouteArgs());
+      final args = routeData.argsAs<LoginRouteArgs>(orElse: () => const LoginRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: LoginPage(
@@ -77,6 +76,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const TicketFormPage(),
+      );
+    },
+    TicketHistoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TicketHistoryPage(),
       );
     },
     TicketListRoute.name: (routeData) {
@@ -261,6 +266,20 @@ class TicketFormRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'TicketFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TicketHistoryPage]
+class TicketHistoryRoute extends PageRouteInfo<void> {
+  const TicketHistoryRoute({List<PageRouteInfo>? children})
+      : super(
+          TicketHistoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TicketHistoryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

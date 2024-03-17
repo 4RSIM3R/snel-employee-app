@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:next_starter/presentation/theme/theme.dart';
 
 @RoutePage()
 class TicketDetailPage extends StatelessWidget {
@@ -19,6 +20,11 @@ class TicketDetailPage extends StatelessWidget {
             icon: const Icon(Icons.history),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorTheme.primary,
+        onPressed: () {},
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
