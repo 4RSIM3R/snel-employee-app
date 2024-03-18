@@ -70,6 +70,7 @@ class _CatalogListPageState extends State<CatalogListPage> {
                     onTap: () {
                       context.router.push(const CatalogFormRoute());
                     },
+                    status: 'WORKING',
                   ),
                 ),
               ).scrollVertical().expand(),

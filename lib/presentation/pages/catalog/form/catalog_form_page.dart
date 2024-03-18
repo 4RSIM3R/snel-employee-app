@@ -28,7 +28,6 @@ class _CatalogFormPageState extends State<CatalogFormPage> {
   });
 
   final picker = ImagePicker();
-
   List<XFile?> image = [];
   XFile? excels;
 

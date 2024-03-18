@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:next_starter/presentation/components/button/primary_button.dart';
 import 'package:next_starter/presentation/theme/theme.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class TicketCard extends StatelessWidget {
-  const TicketCard({super.key, required this.title, required this.onTap});
+  const TicketCard({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.status,
+  });
 
   final String title;
+  final String status;
   final VoidCallback onTap;
 
   @override
@@ -84,7 +91,14 @@ class TicketCard extends StatelessWidget {
                   ),
                 )
               ],
-            )
+            ),
+            const SizedBox(height: 8),
+            status == 'CUSTOMER_APPROVED'
+                ? PrimaryButton(
+                    title: 'Check In',
+                    onTap: () {},
+                  )
+                : Container()
           ],
         ),
       ),

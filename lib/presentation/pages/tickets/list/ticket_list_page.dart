@@ -67,6 +67,7 @@ class _TicketListPageState extends State<TicketListPage> {
                   10,
                   (index) => TicketCard(
                     title: 'Fixing Something In Pipeline',
+                    status: index % 3 == 0 ? 'CUSTOMER_APPROVED' : 'WORKING',
                     onTap: () {
                       context.router.push(const TicketDetailRoute());
                     },
