@@ -15,8 +15,8 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart'
     as _i7;
 
-import 'application/auth/auth_cubit.dart' as _i30;
-import 'application/bloc/pagination_bloc.dart' as _i31;
+import 'application/auth/auth_cubit.dart' as _i31;
+import 'application/bloc/pagination_bloc.dart' as _i32;
 import 'common/network/network_info.dart' as _i8;
 import 'common/permission/permission.dart' as _i9;
 import 'common/permission/permission_impl.dart' as _i10;
@@ -24,7 +24,7 @@ import 'common/storage/shared_pref_storage.dart' as _i11;
 import 'common/storage/storage.dart' as _i14;
 import 'common/storage/storage_path.dart' as _i12;
 import 'common/utils/image_resize.dart' as _i6;
-import 'data/datasources/network/network_source.dart' as _i32;
+import 'data/datasources/network/network_source.dart' as _i33;
 import 'data/datasources/remote_datasources/auth_remote/auth_remote.dart'
     as _i18;
 import 'data/datasources/remote_datasources/auth_remote/auth_remote_impl.dart'
@@ -51,6 +51,7 @@ import 'data/repositories/catalog_repository.dart' as _i23;
 import 'data/repositories/post_repository.dart' as _i26;
 import 'data/repositories/profile_repository.dart' as _i29;
 import 'data/repositories/ticket_repository.dart' as _i17;
+import 'presentation/pages/tickets/list/cubit/ticket_list_cubit.dart' as _i30;
 import 'presentation/routes/app_router.dart' as _i3;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -128,10 +129,12 @@ Future<_i1.GetIt> $initGetIt(
         gh<_i8.NetworkInfo>(),
         gh<_i27.ProfileRemote>(),
       ));
-  gh.factory<_i30.AuthCubit>(() => _i30.AuthCubit(gh<_i20.AuthRepository>()));
-  gh.factory<_i31.PaginationBloc>(
-      () => _i31.PaginationBloc(gh<_i26.PostRepository>()));
+  gh.factory<_i30.TicketListCubit>(
+      () => _i30.TicketListCubit(gh<_i17.TicketRepository>()));
+  gh.factory<_i31.AuthCubit>(() => _i31.AuthCubit(gh<_i20.AuthRepository>()));
+  gh.factory<_i32.PaginationBloc>(
+      () => _i32.PaginationBloc(gh<_i26.PostRepository>()));
   return getIt;
 }
 
-class _$ApiService extends _i32.ApiService {}
+class _$ApiService extends _i33.ApiService {}

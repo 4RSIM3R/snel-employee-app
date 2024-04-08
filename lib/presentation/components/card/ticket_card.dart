@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:next_starter/data/models/ticket/ticket_model.dart';
 import 'package:next_starter/presentation/components/button/primary_button.dart';
 import 'package:next_starter/presentation/theme/theme.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class TicketCard extends StatelessWidget {
-  const TicketCard({
-    super.key,
-    required this.title,
-    required this.onTap,
-    required this.status,
-  });
+  const TicketCard({super.key, required this.model});
 
-  final String title;
-  final String status;
-  final VoidCallback onTap;
+  final TicketModel model;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {},
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(8),
@@ -40,7 +34,7 @@ class TicketCard extends StatelessWidget {
                   backgroundColor: Colors.blue.withOpacity(0.3),
                   side: BorderSide.none,
                   label: Text(
-                    'WORKING',
+                    '${model.status}',
                     style: CustomTextTheme.paragraph1.copyWith(
                       color: ColorTheme.primary,
                       fontWeight: FontWeight.w600,
@@ -55,12 +49,12 @@ class TicketCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              title,
+              '${model.title}',
               style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 4),
             ReadMoreText(
-              'Flutter is Google mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
+              '${model.information}',
               trimLines: 2,
               style: CustomTextTheme.paragraph1,
               colorClickableText: ColorTheme.primary,
@@ -77,7 +71,7 @@ class TicketCard extends StatelessWidget {
                   side: BorderSide.none,
                   backgroundColor: Colors.blue.withOpacity(0.3),
                   label: Text(
-                    'Blok Rokan Hulu',
+                    '${model.site?.name}',
                     style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -86,14 +80,14 @@ class TicketCard extends StatelessWidget {
                   side: BorderSide.none,
                   backgroundColor: Colors.blue.withOpacity(0.3),
                   label: Text(
-                    'PT Pertamina',
+                    '${model.customer?.name}',
                     style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w600),
                   ),
                 )
               ],
             ),
             const SizedBox(height: 8),
-            status == 'CUSTOMER_APPROVED'
+            model.status == 'CUSTOMER_APPROVED'
                 ? PrimaryButton(
                     title: 'Check In',
                     onTap: () {},

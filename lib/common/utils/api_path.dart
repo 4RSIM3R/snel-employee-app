@@ -10,9 +10,9 @@ class ApiPath {
   static const String forgotPassword = "forgot-password";
 
   // Ticket
-  static const String getRegularTicket = "ticket/employee/get-regular";
-  static const String getCatalogingTicket = "ticket/employee/get-recording";
-  static const String getDetailTicket = "ticket/employee/detail/6";
+  static const String regularTicket = "ticket/employee/get-regular";
+  static const String catalogingTicket = "ticket/employee/get-recording";
+  static const String detailTicket = "ticket/employee/detail/6";
 
   // Profile
   static const String profile = "profile/employee";
