@@ -1,6 +1,5 @@
 import 'package:adaptive_sizer/adaptive_sizer.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,19 +23,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final bloc = locator<AuthCubit>();
+
   final form = fb.group({
-    'email': [
-      kDebugMode ? 'agus@nexteam.id' : '',
-      Validators.required,
-      Validators.email,
-    ],
-    'password': [kDebugMode ? '123a123a123' : '', Validators.required],
+    'email': ['', Validators.required, Validators.email],
+    'password': ['', Validators.required],
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => locator<AuthCubit>(),
+      create: (context) => bloc,
       child: ReactiveFormBuilder(
         form: () => form,
         builder: (context, form, child) => BaseScaffold(
@@ -54,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                   success: (msg) {
                     context.hideLoading();
                     context.showSnackbar(title: "Sukses", message: msg);
-                    context.route.pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
+                    context.route.replace(const HomeRoute());
                   },
                 );
               },
@@ -66,12 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         PrimaryButton(
                           onTap: () {
                             FocusManager.instance.primaryFocus?.unfocus();
-                            if (widget.isAddAccount) {
-                              context.route.pop();
-                            } else {
-                              // context.read<AuthCubit>().login(formG.value);
-                              context.route.pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
-                            }
+                            bloc.login(formG.value);
                           },
                           title: "Masuk",
                           isEnable: formG.valid,
@@ -114,9 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   'Selamat datang di Snel',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: CustomTextTheme.paragraph3.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: CustomTextTheme.paragraph3.copyWith(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   'Harap masukkan email dan password dengan benar',

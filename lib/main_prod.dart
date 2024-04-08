@@ -7,8 +7,7 @@ void main() {
   Flavor.create(
     Environment.production,
     properties: {
-      Keys.apiUrl: 'https://jsonplaceholder.typicode.com/',
-      // Keys.apiKey: 'lksdhjfkjhdsf8sdfjkhsdf896',
+      Keys.apiUrl: 'https://snel.nexteam.id/api/',
       Configs.customKey: 'value',
     },
   );
