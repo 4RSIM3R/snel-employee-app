@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:next_starter/presentation/components/card/ticket_card.dart';
 import 'package:next_starter/presentation/components/input/dropdown_input.dart';
-import 'package:next_starter/presentation/routes/app_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -48,9 +46,9 @@ class _CatalogListPageState extends State<CatalogListPage> {
       body: ReactiveFormBuilder(
         form: () => form,
         builder: (context, form, child) {
-          return Column(
+          return const Column(
             children: [
-              const DropdownInput(
+              DropdownInput(
                 title: 'Status',
                 formControlName: 'status',
                 hint: 'Ticket Status',
@@ -61,19 +59,19 @@ class _CatalogListPageState extends State<CatalogListPage> {
                   }
                 ],
               ),
-              const SizedBox(height: 16),
-              Column(
-                children: List.generate(
-                  10,
-                  (index) => TicketCard(
-                    title: 'Cataloging Task #1',
-                    onTap: () {
-                      context.router.push(const CatalogFormRoute());
-                    },
-                    status: 'WORKING',
-                  ),
-                ),
-              ).scrollVertical().expand(),
+              SizedBox(height: 16),
+              // Column(
+              //   children: List.generate(
+              //     10,
+              //     (index) => TicketCard(
+              //       title: 'Cataloging Task #1',
+              //       onTap: () {
+              //         context.router.push(const CatalogFormRoute());
+              //       },
+              //       status: 'WORKING',
+              //     ),
+              //   ),
+              // ).scrollVertical().expand(),
             ],
           ).p(16);
         },
