@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:next_starter/data/models/ticket/ticket_model.dart';
 import 'package:next_starter/presentation/components/button/primary_button.dart';
 import 'package:next_starter/presentation/theme/theme.dart';
@@ -42,7 +43,7 @@ class TicketCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '13 March 2024',
+                  DateFormat('dd MM yyyy').format(model.date!),
                   style: CustomTextTheme.paragraph1,
                 )
               ],

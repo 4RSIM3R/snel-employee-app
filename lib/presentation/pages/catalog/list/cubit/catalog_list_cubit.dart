@@ -13,4 +13,18 @@ class CatalogListCubit extends Cubit<CatalogListState> {
 
   final TicketRepository repository;
 
+  
+  Future<void> get({
+    required String start,
+    required String end,
+    required String status,
+  }) async {
+    emit(const CatalogListState.loading());
+    final response = await repository.getRecordingTicket(params: {"start": start, "end": end, "status": status});
+    response.fold(
+      (l) => emit(CatalogListState.failure(l.message)),
+      (r) => emit(CatalogListState.success(r)),
+    );
+  }
+
 }

@@ -12,6 +12,13 @@ class TicketRepository extends BaseRepository {
 
   EitherResponse<List<TicketModel>> getRegularTicket({required Map<String, dynamic> params}) async {
     return handleNetworkCall(
+      call: remote.getRegularTicket(params: params),
+      onSuccess: (r) => r,
+    );
+  }
+
+  EitherResponse<List<TicketModel>> getRecordingTicket({required Map<String, dynamic> params}) async {
+    return handleNetworkCall(
       call: remote.getRecording(params: params),
       onSuccess: (r) => r,
     );
