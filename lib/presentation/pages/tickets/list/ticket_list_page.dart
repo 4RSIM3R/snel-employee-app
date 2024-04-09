@@ -74,7 +74,7 @@ class _TicketListPageState extends State<TicketListPage> {
 
                 bloc.get(
                   start: toMysqlDate(start),
-                  end: toMysqlDate(start),
+                  end: toMysqlDate(end),
                   status: form.controls['status']!.value.toString(),
                 );
               },

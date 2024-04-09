@@ -12,7 +12,7 @@ class TicketRemoteImpl extends BaseDioRemoteSource implements TicketRemote {
   Future<List<TicketModel>> getRecording({required Map<String, dynamic> params}) async {
     return networkRequest(
       isAuth: true,
-      request: (dio) => dio.get(ApiPath.regularTicket),
+      request: (dio) => dio.get(ApiPath.regularTicket, queryParameters: params),
       onResponse: (json) => (json['data'] as List).map((e) => TicketModel.fromJson(e)).toList(),
     );
   }
@@ -21,7 +21,7 @@ class TicketRemoteImpl extends BaseDioRemoteSource implements TicketRemote {
   Future<List<TicketModel>> getRegularTicket({required Map<String, dynamic> params}) async {
     return networkRequest(
       isAuth: true,
-      request: (dio) => dio.get(ApiPath.catalogingTicket),
+      request: (dio) => dio.get(ApiPath.catalogingTicket, queryParameters: params),
       onResponse: (json) => (json['data'] as List).map((e) => TicketModel.fromJson(e)).toList(),
     );
   }

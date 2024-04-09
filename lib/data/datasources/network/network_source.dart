@@ -29,7 +29,15 @@ abstract class ApiService {
       ConnectionManager(idleTimeout: const Duration(seconds: 15)),
     );
     if (kDebugMode) {
-      dio.interceptors.add(PrettyDioLogger());
+      dio.interceptors.add(PrettyDioLogger(
+        compact: true,
+        error: true,
+        request: true,
+        requestBody: true,
+        requestHeader: true,
+        responseBody: true,
+        responseHeader: true,
+      ));
     }
 
     return dio;

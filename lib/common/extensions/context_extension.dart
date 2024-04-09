@@ -65,7 +65,7 @@ extension BuildContextX on BuildContext {
             title: title,
             message: message,
             error: error,
-            textColor: ColorTheme.statusRed,
+            textColor: ColorTheme.white,
           ),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
