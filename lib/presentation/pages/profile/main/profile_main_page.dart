@@ -23,6 +23,12 @@ class _ProfileMainPageState extends State<ProfileMainPage> {
   final bloc = locator<ProfileMainCubit>();
 
   @override
+  void initState() {
+    super.initState();
+    bloc.get();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
@@ -52,42 +58,60 @@ class _ProfileMainPageState extends State<ProfileMainPage> {
             backgroundColor: Colors.white,
             title: const Text('Profile'),
             actions: [
-              IconButton(
-                onPressed: () {
-                  auth.logout();
+              BlocBuilder<ProfileMainCubit, ProfileMainState>(
+                builder: (context, state) {
+                  return state.maybeMap(
+                    orElse: () => Container(),
+                    success: (success) => IconButton(
+                      onPressed: () {
+                        auth.logout();
+                      },
+                      icon: const Icon(Icons.exit_to_app, color: Colors.red),
+                    ),
+                  );
                 },
-                icon: const Icon(Icons.exit_to_app, color: Colors.red),
               )
             ],
           ),
-          body: Column(
-            children: [
-              Row(
-                children: [
-                  Container(
-                    height: 70,
-                    width: 70,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.primary,
-                      borderRadius: BorderRadius.circular(45),
-                      image: const DecorationImage(
-                        image: CachedNetworkImageProvider("https://i.pravatar.cc/300"),
-                        fit: BoxFit.cover,
-                      ),
+          body: BlocBuilder<ProfileMainCubit, ProfileMainState>(
+            builder: (context, state) {
+              return state.maybeMap(
+                orElse: () => const Center(child: CircularProgressIndicator.adaptive()),
+                failure: (failure) => Center(child: Text(failure.message)),
+                success: (success) => Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 70,
+                          width: 70,
+                          decoration: BoxDecoration(
+                            color: ColorTheme.primary,
+                            borderRadius: BorderRadius.circular(45),
+                            image: const DecorationImage(
+                              image: CachedNetworkImageProvider("https://i.pravatar.cc/300"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${success.payload.name}',
+                              style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
+                            ),
+                            Text('Employee ${success.payload.id}', style: CustomTextTheme.paragraph1),
+                          ],
+                        )
+                      ],
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Nadiem Makarim', style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600)),
-                      Text('PT Sukses Bersama', style: CustomTextTheme.paragraph1),
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(height: 16),
-            ],
+                    const SizedBox(height: 16),
+                  ],
+                ),
+              );
+            },
           ).p(16),
         ),
       ),
