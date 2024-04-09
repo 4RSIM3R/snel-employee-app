@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                   orElse: () {},
                   loading: () => context.showLoadingIndicator(),
                   error: (msg) {
+                    context.hideLoading();
                     context.showSnackbar(title: "Error", message: msg, error: true);
                   },
                   success: (msg) {

@@ -1,24 +1,6 @@
 part of 'theme.dart';
 
 class AppCoreTheme {
-  static const int primaryColorValue = 0xFFC1272D;
-  static const primaryColor = Color(primaryColorValue);
-  static const MaterialColor primarySwatch = MaterialColor(
-    primaryColorValue,
-    <int, Color>{
-      50: Color(0xFFF8E5E6),
-      100: Color(0xFFECBEC0),
-      200: Color(0xFFE09396),
-      300: Color(0xFFD4686C),
-      400: Color(0xFFCA474D),
-      500: Color(primaryColorValue),
-      600: Color(0xFFBB2328),
-      700: Color(0xFFB31D22),
-      800: Color(0xFFAB171C),
-      900: Color(0xFF9E0E11),
-    },
-  );
-
   static const int accentColorValue = 0xFFFF9A9B;
   static const accentColor = Color(accentColorValue);
   static const MaterialColor accentSwatch = MaterialColor(
@@ -42,13 +24,22 @@ class AppCoreTheme {
 
   static ThemeData theme = ThemeData(
     useMaterial3: true,
-    primaryColor: primaryColor,
-    primarySwatch: primarySwatch,
+    primaryColor: ColorTheme.primary,
+    primarySwatch: ColorTheme.neutral,
     scaffoldBackgroundColor: Colors.grey.shade100,
-    progressIndicatorTheme: const ProgressIndicatorThemeData(
-      color: primaryColor,
-    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(color: ColorTheme.primary),
     textTheme: GoogleFonts.interTextTheme(),
+
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      elevation: 5.0,
+      backgroundColor: Colors.white,
+      showUnselectedLabels: false,
+      showSelectedLabels: true,
+      selectedIconTheme: IconThemeData(color: ColorTheme.primary),
+      unselectedIconTheme: IconThemeData(color: Colors.grey),
+      selectedLabelStyle: TextStyle(color: ColorTheme.primary),
+      selectedItemColor: ColorTheme.primary,
+    ),
     // Bottom AppBar Theme
     bottomAppBarTheme: const BottomAppBarTheme(
       elevation: 10,
@@ -58,8 +49,8 @@ class AppCoreTheme {
     // ElevatedButton Theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: primaryColor,
-        surfaceTintColor: primaryColor,
+        backgroundColor: ColorTheme.primary,
+        surfaceTintColor: ColorTheme.primary,
         foregroundColor: Colors.white,
         fixedSize: const Size.fromHeight(kBottomNavigationBarHeight - 12.5),
         shape: const RoundedRectangleBorder(
@@ -70,12 +61,12 @@ class AppCoreTheme {
     // Text Button Theme
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: primaryColor,
+        foregroundColor: ColorTheme.primary,
       ),
     ),
     // FAB Theme
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: primaryColor,
+      backgroundColor: ColorTheme.primary,
       foregroundColor: Colors.white,
       shape: CircleBorder(),
     ),
@@ -114,7 +105,7 @@ class AppCoreTheme {
       ),
       focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide(
-          color: primaryColor,
+          color: ColorTheme.primary,
         ),
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
@@ -155,9 +146,9 @@ class AppCoreTheme {
     // Tab Bar Theme
     tabBarTheme: TabBarTheme(
       labelPadding: EdgeInsets.zero,
-      labelColor: primaryColor,
+      labelColor: ColorTheme.primary,
       labelStyle: const TextStyle(
-        color: primaryColor,
+        color: ColorTheme.primary,
         fontSize: 14,
         fontWeight: FontWeight.w600,
       ),
@@ -167,7 +158,7 @@ class AppCoreTheme {
         fontSize: 14,
       ),
       dividerColor: Colors.transparent,
-      indicatorColor: primaryColor,
+      indicatorColor: ColorTheme.primary,
       indicatorSize: TabBarIndicatorSize.label,
       overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {
@@ -190,7 +181,7 @@ class AppCoreTheme {
       splashRadius: 5.0,
       fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
-          return primaryColor;
+          return ColorTheme.primary;
         }
 
         return null;
@@ -200,10 +191,10 @@ class AppCoreTheme {
     radioTheme: RadioThemeData(
       fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
-          return primaryColor;
+          return ColorTheme.primary;
         }
 
-        return primaryColor;
+        return ColorTheme.primary;
       }),
     ),
   );
