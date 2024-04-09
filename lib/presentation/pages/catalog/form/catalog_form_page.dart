@@ -2,7 +2,6 @@ import 'package:adaptive_sizer/adaptive_sizer.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:next_starter/common/storage/storage.dart';
 import 'package:next_starter/injection.dart';
@@ -31,7 +30,6 @@ class _CatalogFormPageState extends State<CatalogFormPage> {
   List<XFile?> image = [];
   XFile? excels;
 
-  final _controller = QuillController.basic();
 
   @override
   Widget build(BuildContext context) {
@@ -80,33 +78,7 @@ class _CatalogFormPageState extends State<CatalogFormPage> {
                     children: [
                       Text("Specification", style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w600)),
                       8.verticalSpace,
-                      QuillToolbar.simple(
-                        configurations: QuillSimpleToolbarConfigurations(
-                          controller: _controller,
-                          sharedConfigurations: const QuillSharedConfigurations(),
-                          multiRowsDisplay: false,
-                          showBackgroundColorButton: false,
-                          showClearFormat: false,
-                          showCodeBlock: false,
-                          showDividers: false,
-                          showFontFamily: false,
-                          showFontSize: false,
-                          showInlineCode: false,
-                          showLink: false,
-                          showRedo: false,
-                          showColorButton: false,
-                          showUndo: false,
-                          showHeaderStyle: false,
-                          showSearchButton: false,
-                          showSmallButton: false,
-                          showSubscript: false,
-                          showUnderLineButton: false,
-                          showStrikeThrough: false,
-                          showListCheck: false,
-                          showQuote: false,
-                          showSuperscript: false,
-                        ),
-                      ),
+                      
                       8.verticalSpace,
                       Expanded(
                         child: Container(
@@ -114,12 +86,7 @@ class _CatalogFormPageState extends State<CatalogFormPage> {
                             border: Border.all(color: ColorTheme.border),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: QuillEditor.basic(
-                            configurations: QuillEditorConfigurations(
-                              controller: _controller,
-                              padding: const EdgeInsets.all(8),
-                            ),
-                          ),
+                        
                         ),
                       )
                     ],

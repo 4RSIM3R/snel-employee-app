@@ -2,7 +2,6 @@ import 'package:adaptive_sizer/adaptive_sizer.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:next_starter/presentation/components/button/primary_button.dart';
 import 'package:next_starter/presentation/components/input/text_input.dart';
@@ -22,7 +21,7 @@ class _TicketFormPageState extends State<TicketFormPage> {
     'title': ['', Validators.required],
   });
 
-  final _controller = QuillController.basic();
+
 
   final picker = ImagePicker();
   List<XFile?> image = [];
@@ -55,33 +54,7 @@ class _TicketFormPageState extends State<TicketFormPage> {
                       children: [
                         Text("Information", style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w600)),
                         8.verticalSpace,
-                        QuillToolbar.simple(
-                          configurations: QuillSimpleToolbarConfigurations(
-                            controller: _controller,
-                            sharedConfigurations: const QuillSharedConfigurations(),
-                            multiRowsDisplay: false,
-                            showBackgroundColorButton: false,
-                            showClearFormat: false,
-                            showCodeBlock: false,
-                            showDividers: false,
-                            showFontFamily: false,
-                            showFontSize: false,
-                            showInlineCode: false,
-                            showLink: false,
-                            showRedo: false,
-                            showColorButton: false,
-                            showUndo: false,
-                            showHeaderStyle: false,
-                            showSearchButton: false,
-                            showSmallButton: false,
-                            showSubscript: false,
-                            showUnderLineButton: false,
-                            showStrikeThrough: false,
-                            showListCheck: false,
-                            showQuote: false,
-                            showSuperscript: false,
-                          ),
-                        ),
+                       
                         8.verticalSpace,
                         Expanded(
                           child: Container(
@@ -89,12 +62,7 @@ class _TicketFormPageState extends State<TicketFormPage> {
                               border: Border.all(color: ColorTheme.border),
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child: QuillEditor.basic(
-                              configurations: QuillEditorConfigurations(
-                                controller: _controller,
-                                padding: const EdgeInsets.all(8),
-                              ),
-                            ),
+                          
                           ),
                         )
                       ],
