@@ -2,13 +2,31 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:next_starter/data/models/ticket/ticket_model.dart';
+import 'package:next_starter/injection.dart';
+import 'package:next_starter/presentation/pages/tickets/detail/cubit/ticket_detail_cubit.dart';
 import 'package:next_starter/presentation/routes/app_router.dart';
 import 'package:next_starter/presentation/theme/theme.dart';
 import 'package:readmore/readmore.dart';
 
 @RoutePage()
-class TicketDetailPage extends StatelessWidget {
-  const TicketDetailPage({super.key});
+class TicketDetailPage extends StatefulWidget {
+  const TicketDetailPage({super.key, required this.model});
+
+  final TicketModel model;
+
+  @override
+  State<TicketDetailPage> createState() => _TicketDetailPageState();
+}
+
+class _TicketDetailPageState extends State<TicketDetailPage> {
+  final bloc = locator<TicketDetailCubit>();
+
+  @override
+  void initState() {
+    super.initState();
+    // bloc.get();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +38,7 @@ class TicketDetailPage extends StatelessWidget {
         title: const Text('Ticket Detail'),
         actions: [
           IconButton(
-            onPressed: ()  {
+            onPressed: () {
               context.router.push(const TicketHistoryRoute());
             },
             icon: const Icon(Icons.history),
@@ -106,8 +124,8 @@ class TicketDetailPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: const DecorationImage(
-                      image:
-                          CachedNetworkImageProvider('https://www.pymnts.com/wp-content/uploads/2022/04/car-repair.jpg'),
+                      image: CachedNetworkImageProvider(
+                          'https://www.pymnts.com/wp-content/uploads/2022/04/car-repair.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),

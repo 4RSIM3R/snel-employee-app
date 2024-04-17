@@ -12,7 +12,7 @@ class ApiPath {
   // Ticket
   static const String regularTicket = "ticket/employee/get-regular";
   static const String catalogingTicket = "ticket/employee/get-recording";
-  static const String detailTicket = "ticket/employee/detail/6";
+  static const String detailTicket = "ticket/employee/detail";
 
   // Profile
   static const String profile = "profile/employee";

@@ -68,9 +68,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     TicketDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TicketDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const TicketDetailPage(),
+        child: TicketDetailPage(
+          key: args.key,
+          model: args.model,
+        ),
       );
     },
     TicketFormRoute.name: (routeData) {
@@ -245,16 +249,40 @@ class SplashRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TicketDetailPage]
-class TicketDetailRoute extends PageRouteInfo<void> {
-  const TicketDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class TicketDetailRoute extends PageRouteInfo<TicketDetailRouteArgs> {
+  TicketDetailRoute({
+    Key? key,
+    required TicketModel model,
+    List<PageRouteInfo>? children,
+  }) : super(
           TicketDetailRoute.name,
+          args: TicketDetailRouteArgs(
+            key: key,
+            model: model,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'TicketDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<TicketDetailRouteArgs> page =
+      PageInfo<TicketDetailRouteArgs>(name);
+}
+
+class TicketDetailRouteArgs {
+  const TicketDetailRouteArgs({
+    this.key,
+    required this.model,
+  });
+
+  final Key? key;
+
+  final TicketModel model;
+
+  @override
+  String toString() {
+    return 'TicketDetailRouteArgs{key: $key, model: $model}';
+  }
 }
 
 /// generated route for
