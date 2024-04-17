@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:next_starter/data/models/ticket/ticket_model.dart';
 import 'package:next_starter/injection.dart';
+import 'package:next_starter/presentation/components/button/primary_button.dart';
 import 'package:next_starter/presentation/pages/tickets/detail/cubit/ticket_detail_cubit.dart';
+import 'package:next_starter/presentation/pages/tickets/detail/widgets/ticket_detail_card.dart';
 import 'package:next_starter/presentation/routes/app_router.dart';
 import 'package:next_starter/presentation/theme/theme.dart';
-import 'package:readmore/readmore.dart';
+import 'package:swipe_image_gallery/swipe_image_gallery.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 @RoutePage()
 class TicketDetailPage extends StatefulWidget {
@@ -22,125 +25,141 @@ class TicketDetailPage extends StatefulWidget {
 class _TicketDetailPageState extends State<TicketDetailPage> {
   final bloc = locator<TicketDetailCubit>();
 
+  int currentStep = 0;
+
   @override
   void initState() {
     super.initState();
-    // bloc.get();
+    bloc.get(id: widget.model.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => bloc),
+      ],
+      child: Scaffold(
         backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text('Ticket Detail'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.router.push(const TicketHistoryRoute());
-            },
-            icon: const Icon(Icons.history),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Title', style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 4),
-            Text(
-              'Fixing Broken Pipe In Sector',
-              style: CustomTextTheme.paragraph2,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const Text('Ticket Detail'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                context.router.push(const TicketFormRoute());
+              },
+              icon: const Icon(Icons.add),
             ),
-            const SizedBox(height: 8),
-            Text('Information', style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 4),
-            ReadMoreText(
-              'Flutter is Google mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
-              trimLines: 2,
-              style: CustomTextTheme.paragraph1,
-              colorClickableText: ColorTheme.primary,
-              trimMode: TrimMode.Line,
-              trimCollapsedText: 'Show more',
-              trimExpandedText: 'Show less',
-              moreStyle: CustomTextTheme.paragraph1.copyWith(color: ColorTheme.primary),
-            ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Customer', style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600)),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.phone_fill),
-                )
-              ],
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Mr John Doe',
-              style: CustomTextTheme.paragraph2,
-            ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Site', style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600)),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.location_solid),
-                )
-              ],
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Blok Rokan Hulu',
-              style: CustomTextTheme.paragraph2,
-            ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Photos', style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600)),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.add),
-                )
-              ],
-            ),
-            const SizedBox(height: 4),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: List.generate(
-                7,
-                (index) => Container(
-                  height: 70,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: const DecorationImage(
-                      image: CachedNetworkImageProvider(
-                          'https://www.pymnts.com/wp-content/uploads/2022/04/car-repair.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorTheme.primary,
-        onPressed: () {
-          context.router.push(const TicketFormRoute());
-        },
-        child: const Icon(Icons.edit, color: Colors.white),
+        body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: BlocBuilder<TicketDetailCubit, TicketDetailState>(
+              builder: (context, state) {
+                return state.maybeMap(
+                  orElse: () => const Center(child: CircularProgressIndicator.adaptive()),
+                  failure: (failure) => Center(child: Text(failure.message)),
+                  success: (success) => Theme(
+                    data: ThemeData(
+                      colorScheme: Theme.of(context).colorScheme.copyWith(primary: ColorTheme.primary),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Title', style: CustomTextTheme.paragraph1),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${success.payload.title}',
+                            style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 8),
+                          Text('Number', style: CustomTextTheme.paragraph1),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${success.payload.number}',
+                            style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 8),
+                          Text('Information', style: CustomTextTheme.paragraph1),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${success.payload.information}',
+                            style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 8),
+                          Text('Site', style: CustomTextTheme.paragraph1),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${success.payload.site?.name}',
+                            style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 8),
+                          Text('Image Attachment', style: CustomTextTheme.paragraph1),
+                          const SizedBox(height: 4),
+                          (success.payload.photo ?? []).isNotEmpty
+                              ? PrimaryButton(
+                                  title: 'See Attachment',
+                                  onTap: () {
+                                    var assets = (success.payload.photo ?? [])
+                                        .map(
+                                          (e) => Image(image: NetworkImage(e)),
+                                        )
+                                        .toList();
+                                    SwipeImageGallery(context: context, children: assets).show();
+                                  },
+                                )
+                              : Text(
+                                  'No Attachment Found',
+                                  style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
+                                ),
+                          const SizedBox(height: 16),
+                          (success.payload.histories ?? []).isNotEmpty
+                              ? Stepper(
+                                  type: StepperType.vertical,
+                                  currentStep: currentStep,
+                                  margin: const EdgeInsetsDirectional.only(start: 60.0),
+                                  controlsBuilder: (context, details) => Container(),
+                                  onStepTapped: (index) {
+                                    setState(() => currentStep = index);
+                                  },
+                                  steps: (success.payload.histories ?? [])
+                                      .map(
+                                        (e) => Step(
+                                          title: Text(
+                                            DateFormat('dd MMMMM yyyy').format(e.createdAt!),
+                                            style: CustomTextTheme.paragraph2.copyWith(fontWeight: FontWeight.w600),
+                                          ),
+                                          isActive: true,
+                                          state: StepState.indexed,
+                                          content: TicketDetailCard(model: e),
+                                        ),
+                                      )
+                                      .toList(),
+                                ).expand()
+                              : Center(
+                                  child: Text(
+                                    'There is no ticket history',
+                                    style: CustomTextTheme.paragraph1,
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: ColorTheme.primary,
+          onPressed: () {
+            context.router.push(const TicketFormRoute());
+          },
+          child: const Icon(Icons.edit, color: Colors.white),
+        ),
       ),
     );
   }

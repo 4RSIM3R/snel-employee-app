@@ -13,7 +13,7 @@ class TicketDetailCubit extends Cubit<TicketDetailState> {
 
   final TicketRepository repository;
 
-  Future<void> get(dynamic id) async {
+  Future<void> get({required id}) async {
     emit(const TicketDetailState.loading());
     final response = await repository.getDetailTicket(id: id);
     response.fold((l) => null, (r) => null);

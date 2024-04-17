@@ -21,8 +21,6 @@ class _TicketFormPageState extends State<TicketFormPage> {
     'title': ['', Validators.required],
   });
 
-
-
   final picker = ImagePicker();
   List<XFile?> image = [];
 
@@ -47,27 +45,26 @@ class _TicketFormPageState extends State<TicketFormPage> {
                     hint: 'Short Description About Your Task',
                   ),
                   const SizedBox(height: 16),
-                  SizedBox(
-                    height: 250,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Information", style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w600)),
-                        8.verticalSpace,
-                       
-                        8.verticalSpace,
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: ColorTheme.border),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 250,
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Text("Information", style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w600)),
+                  //       8.verticalSpace,
+                  //       TextInput(title: 'Information', formControlName: 'information', hint: hint)
+                  //       8.verticalSpace,
+                  //       Expanded(
+                  //         child: Container(
+                  //           decoration: BoxDecoration(
+                  //             border: Border.all(color: ColorTheme.border),
+                  //             borderRadius: BorderRadius.circular(4),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                   const SizedBox(height: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

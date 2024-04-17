@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:next_starter/data/models/ticket/ticket_model.dart';
 import 'package:next_starter/presentation/pages/catalog/form/catalog_form_page.dart';
 import 'package:next_starter/presentation/pages/catalog/list/catalog_list_page.dart';
 import 'package:next_starter/presentation/pages/profile/main/profile_main_page.dart';
 import 'package:next_starter/presentation/pages/tickets/detail/ticket_detail_page.dart';
 import 'package:next_starter/presentation/pages/tickets/form/ticket_form_page.dart';
-import 'package:next_starter/presentation/pages/tickets/history/ticket_history_page.dart';
 import 'package:next_starter/presentation/pages/tickets/list/ticket_list_page.dart';
 
 import '../pages/pages.dart';
@@ -39,7 +39,6 @@ class AppRouter extends _$AppRouter {
     // Ticket
     AutoRoute(page: TicketDetailRoute.page),
     AutoRoute(page: TicketFormRoute.page),
-    AutoRoute(page: TicketHistoryRoute.page),
     // Catalog
     AutoRoute(page: CatalogFormRoute.page),
     // Profile

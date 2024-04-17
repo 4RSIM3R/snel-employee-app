@@ -13,8 +13,8 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:image_picker/image_picker.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/auth_cubit.dart' as _i32;
-import 'application/bloc/pagination_bloc.dart' as _i33;
+import 'application/auth/auth_cubit.dart' as _i33;
+import 'application/bloc/pagination_bloc.dart' as _i34;
 import 'common/network/network_info.dart' as _i7;
 import 'common/permission/permission.dart' as _i8;
 import 'common/permission/permission_impl.dart' as _i9;
@@ -22,7 +22,7 @@ import 'common/storage/shared_pref_storage.dart' as _i10;
 import 'common/storage/storage.dart' as _i13;
 import 'common/storage/storage_path.dart' as _i11;
 import 'common/utils/image_resize.dart' as _i6;
-import 'data/datasources/network/network_source.dart' as _i35;
+import 'data/datasources/network/network_source.dart' as _i36;
 import 'data/datasources/remote_datasources/auth_remote/auth_remote.dart'
     as _i17;
 import 'data/datasources/remote_datasources/auth_remote/auth_remote_impl.dart'
@@ -50,10 +50,11 @@ import 'data/repositories/post_repository.dart' as _i26;
 import 'data/repositories/profile_repository.dart' as _i29;
 import 'data/repositories/ticket_repository.dart' as _i16;
 import 'presentation/pages/catalog/list/cubit/catalog_list_cubit.dart' as _i20;
-import 'presentation/pages/profile/main/cubit/profile_main_cubit.dart' as _i34;
+import 'presentation/pages/profile/main/cubit/profile_main_cubit.dart' as _i35;
 import 'presentation/pages/tickets/detail/cubit/ticket_detail_cubit.dart'
     as _i30;
-import 'presentation/pages/tickets/list/cubit/ticket_list_cubit.dart' as _i31;
+import 'presentation/pages/tickets/form/cubit/ticket_form_cubit.dart' as _i31;
+import 'presentation/pages/tickets/list/cubit/ticket_list_cubit.dart' as _i32;
 import 'presentation/routes/app_router.dart' as _i3;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -132,14 +133,16 @@ Future<_i1.GetIt> $initGetIt(
       ));
   gh.factory<_i30.TicketDetailCubit>(
       () => _i30.TicketDetailCubit(gh<_i16.TicketRepository>()));
-  gh.factory<_i31.TicketListCubit>(
-      () => _i31.TicketListCubit(gh<_i16.TicketRepository>()));
-  gh.factory<_i32.AuthCubit>(() => _i32.AuthCubit(gh<_i19.AuthRepository>()));
-  gh.factory<_i33.PaginationBloc>(
-      () => _i33.PaginationBloc(gh<_i26.PostRepository>()));
-  gh.factory<_i34.ProfileMainCubit>(
-      () => _i34.ProfileMainCubit(gh<_i29.ProfileRepositry>()));
+  gh.factory<_i31.TicketFormCubit>(
+      () => _i31.TicketFormCubit(gh<_i16.TicketRepository>()));
+  gh.factory<_i32.TicketListCubit>(
+      () => _i32.TicketListCubit(gh<_i16.TicketRepository>()));
+  gh.factory<_i33.AuthCubit>(() => _i33.AuthCubit(gh<_i19.AuthRepository>()));
+  gh.factory<_i34.PaginationBloc>(
+      () => _i34.PaginationBloc(gh<_i26.PostRepository>()));
+  gh.factory<_i35.ProfileMainCubit>(
+      () => _i35.ProfileMainCubit(gh<_i29.ProfileRepositry>()));
   return getIt;
 }
 
-class _$ApiService extends _i35.ApiService {}
+class _$ApiService extends _i36.ApiService {}
