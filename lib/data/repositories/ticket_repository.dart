@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:next_starter/common/base/base_repository.dart';
 import 'package:next_starter/common/typedefs/typedefs.dart';
@@ -32,4 +33,10 @@ class TicketRepository extends BaseRepository {
     );
   }
 
+  EitherResponse<void> submitTicket({required Map<String, dynamic> payload}) async {
+    return handleNetworkCall(
+      call: remote.submit(data: FormData.fromMap(payload)),
+      onSuccess: (r) {},
+    );
+  }
 }

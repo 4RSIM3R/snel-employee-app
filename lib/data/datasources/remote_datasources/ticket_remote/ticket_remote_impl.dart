@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:next_starter/common/base/base_dio_remote_source.dart';
 import 'package:next_starter/common/utils/api_path.dart';
@@ -28,9 +29,12 @@ class TicketRemoteImpl extends BaseDioRemoteSource implements TicketRemote {
   }
 
   @override
-  Future<void> submit() async {
-    // TODO: implement submit
-    throw UnimplementedError();
+  Future<bool> submit({required FormData data}) async {
+    return networkRequest(
+      isAuth: true,
+      request: (dio) => dio.post(ApiPath.submitTicket, data: data),
+      onResponse: (json) => true,
+    );
   }
 
   @override

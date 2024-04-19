@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:adaptive_sizer/adaptive_sizer.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:next_starter/injection.dart';
 import 'package:next_starter/presentation/components/button/primary_button.dart';
 import 'package:next_starter/presentation/components/input/text_input.dart';
+import 'package:next_starter/presentation/pages/tickets/form/cubit/ticket_form_cubit.dart';
 import 'package:next_starter/presentation/theme/theme.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 
 @RoutePage()
 class TicketFormPage extends StatefulWidget {
@@ -19,10 +24,13 @@ class TicketFormPage extends StatefulWidget {
 class _TicketFormPageState extends State<TicketFormPage> {
   final form = fb.group({
     'title': ['', Validators.required],
+    'information': ['', Validators.required],
   });
 
   final picker = ImagePicker();
   List<XFile?> image = [];
+
+  final bloc = locator<TicketFormCubit>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,26 +53,12 @@ class _TicketFormPageState extends State<TicketFormPage> {
                     hint: 'Short Description About Your Task',
                   ),
                   const SizedBox(height: 16),
-                  // SizedBox(
-                  //   height: 250,
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Text("Information", style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w600)),
-                  //       8.verticalSpace,
-                  //       TextInput(title: 'Information', formControlName: 'information', hint: hint)
-                  //       8.verticalSpace,
-                  //       Expanded(
-                  //         child: Container(
-                  //           decoration: BoxDecoration(
-                  //             border: Border.all(color: ColorTheme.border),
-                  //             borderRadius: BorderRadius.circular(4),
-                  //           ),
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
+                  const TextInput(
+                    title: 'Information',
+                    formControlName: 'information',
+                    hint: 'Describe your problem here',
+                    maxLines: 5,
+                  ),
                   const SizedBox(height: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,6 +93,28 @@ class _TicketFormPageState extends State<TicketFormPage> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 16),
+                  image.isNotEmpty
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Attachment Image',
+                              style: CustomTextTheme.paragraph1,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                var assets = image.map((e) => Image(image: FileImage(File(e!.path)))).toList();
+                                SwipeImageGallery(context: context, children: assets).show();
+                              },
+                              child: Text(
+                                'See All',
+                                style: CustomTextTheme.paragraph1.copyWith(color: Colors.blue),
+                              ),
+                            )
+                          ],
+                        )
+                      : Container(),
                   Expanded(child: Container()),
                   ReactiveFormBuilder(
                     form: () => form,
@@ -108,7 +124,9 @@ class _TicketFormPageState extends State<TicketFormPage> {
                           return PrimaryButton(
                             title: 'Submit',
                             isEnable: form.valid,
-                            onTap: () {},
+                            onTap: () {
+                              bloc.submit(payload: form.value, image: image);
+                            },
                           );
                         },
                       );
