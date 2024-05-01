@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:next_starter/data/models/ticket/ticket_model.dart';
 import 'package:next_starter/injection.dart';
 import 'package:next_starter/presentation/components/button/primary_button.dart';
 import 'package:next_starter/presentation/components/input/text_input.dart';
@@ -15,7 +16,9 @@ import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 
 @RoutePage()
 class TicketFormPage extends StatefulWidget {
-  const TicketFormPage({super.key});
+  const TicketFormPage({super.key, required this.model});
+
+  final TicketModel model;
 
   @override
   State<TicketFormPage> createState() => _TicketFormPageState();
@@ -125,6 +128,8 @@ class _TicketFormPageState extends State<TicketFormPage> {
                             title: 'Submit',
                             isEnable: form.valid,
                             onTap: () {
+                              var data = Map.of(form.value);
+                              data['ticket_id'] = widget.model.id;
                               bloc.submit(payload: form.value, image: image);
                             },
                           );

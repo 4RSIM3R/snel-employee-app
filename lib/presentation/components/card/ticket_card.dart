@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:next_starter/data/models/ticket/ticket_model.dart';
 import 'package:next_starter/presentation/components/button/primary_button.dart';
+import 'package:next_starter/presentation/routes/app_router.dart';
 import 'package:next_starter/presentation/theme/theme.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,7 +16,9 @@ class TicketCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.router.pushNamed(TicketDetailRoute.name);
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(8),
@@ -43,7 +47,7 @@ class TicketCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  DateFormat('dd MM yyyy').format(model.date!),
+                  DateFormat('dd MMMM yyyy').format(model.date!),
                   style: CustomTextTheme.paragraph1,
                 )
               ],

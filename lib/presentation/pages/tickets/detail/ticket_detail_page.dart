@@ -48,7 +48,7 @@ class _TicketDetailPageState extends State<TicketDetailPage> {
           actions: [
             IconButton(
               onPressed: () {
-                context.router.push(const TicketFormRoute());
+                // context.router.push( TicketFormRoute());
               },
               icon: const Icon(Icons.add),
             ),
@@ -156,7 +156,7 @@ class _TicketDetailPageState extends State<TicketDetailPage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: ColorTheme.primary,
           onPressed: () {
-            context.router.push(const TicketFormRoute());
+            context.router.push(TicketFormRoute(model: widget.model));
           },
           child: const Icon(Icons.edit, color: Colors.white),
         ),
